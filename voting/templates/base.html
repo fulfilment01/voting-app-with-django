@@ -1,0 +1,118 @@
+<!doctype html>
+{% load static %}
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>SQI VOTING PLATFORM</title>
+        <link rel="shortcut icon" href="{% static 'core/images/fav.png' %}" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'core/images/fav.jpg' %}">
+        <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'core/css/style.css' %}" />
+        <style>
+            .nn{
+                height: 50px;
+            }
+            .ji{
+                color: rgb(28,165,232);
+            }
+            .vb{
+                position: relative;
+                display: inline-block;
+            }
+            .mn{
+                display: none;
+                position: absolute;
+                z-index: 1;
+                background-color: rgb(28,165,232);
+                width: 150px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+            .mn p{
+                color: white;
+                font-weight: 600;
+                font-size: 14.4px;
+            }
+            .vb:focus-within .mn{
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header container-fluid bg-white">
+            <div id="menu-jk" class="nav-col text-white shadow-md mb-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2 align-items-center">
+                            <img class="max-230 mt-2 nn" src="{% static 'images/sqilog.png' %}" alt=""><span class="ji"><a href="{% url 'index' %}">SQI VOTING PLATFORM</a></span>
+                            <a  data-bs-toggle="collapse" data-bs-target="#menu" class="float-end text-dark d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
+                        </div>
+                        <div id="menu" class="col-lg-6 d-none d-lg-block">
+                            <ul class="float-end mul d-inline-block">
+                                {% if request.user.is_authenticated %}
+                                <li class="float-md-start px-4 pe-1 pt-4">
+                                   <a href="{% url 'overallresult' %}" class="fw-bold fs-8 text-primary"> View Overall Result</a>
+                                </li>
+                                <li class="float-md-start px-4 pe-1 py-3">
+                                    <a href="{% url 'logout' %}"><button class="btn fw-bold fs-8 btn-outline-primary px-5">Logout</button></a>
+                                </li>
+                                <li class="float-md-start px-4 pe-1 py-3">
+                                    <button class="btn fw-bold fs-8 btn-primary"><a href="{% url 'profile' %}">My Account</a></button>
+                                </li>
+                                {% else %}
+                                <li class="float-md-start px-4 pe-1 py-3">
+                                    <a href="{% url 'login' %}"><button class="btn fw-bold fs-8 btn-outline-primary px-5">Login</button></a>
+                                </li>
+                                <li class="float-md-start px-4 pe-1 py-3">
+                                    <div class="vb">
+                                        <button class="btn fw-bold fs-8 btn-primary">Register as Voter</button>
+                                        <div class="mn">
+                                            <hr>
+                                            <a href=""><p>My Account</p></a>
+                                            <hr>
+                                            <a href="{% url 'register' %}"><p>Register</p></a>
+                                            <hr>
+                                            <a href=""><p>vote</p></a>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      {% block content %}
+
+      {% endblock %}
+        <div class="copy">
+          <div class="container">
+              <a href="https://www.smarteyeapps.com/">2022 &copy; All Rights Reserved | Designed and Developed by Smarteyeapps.com</a>
+              <span>
+                  <a href=""><i class="fab fa-github"></i></a>
+                  <a href=""><i class="fab fa-google-plus-g"></i></a>
+                  <a href="https://in.pinterest.com/prabnr/pins/"><i class="fab fa-pinterest-p"></i></a>
+                  <a href="https://twitter.com/prabinraja89"><i class="fab fa-twitter"></i></a>
+                  <a href="https://www.facebook.com/freewebtemplatesbysmarteye"><i class="fab fa-facebook-f"></i></a>
+              </span>
+          </div>
+      </div>
+      
+      
+  
+ 
+ 
+  </body>
+  <script src="{% static 'core/js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'core/js/popper.min.js' %}"></script>
+  <script src="{% static 'core/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'core/plugins/scroll-fixed/jquery-scrolltofixed-min.js' %}"></script>
+  <script src="{% static 'core/plugins/testimonial/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'core/js/script.js' %}"></script>
+
+</html>

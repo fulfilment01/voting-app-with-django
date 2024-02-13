@@ -1,0 +1,201 @@
+<!doctype html>
+{% load static %}
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>SQI VOTING PLATFORM</title>
+        <link rel="shortcut icon" href="{% static 'core/images/fav.png' %}" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'core/images/fav.jpg' %}">
+        <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'core/css/style.css' %}" />
+        <style>
+            .nn{
+                height: 50px;
+            }
+            .ji{
+                color: rgb(28,165,232);
+            }
+            .vb{
+                position: relative;
+                display: inline-block;
+            }
+            .mn{
+                display: none;
+                position: absolute;
+                z-index: 1;
+                background-color: rgb(28,165,232);
+                width: 150px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+            .mn p{
+                color: white;
+                font-weight: 600;
+                font-size: 14.4px;
+            }
+            .vb:focus-within .mn{
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header container-fluid bg-white">
+            <div id="menu-jk" class="nav-col text-white shadow-md mb-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2 align-items-center">
+                            <img class="max-230 mt-2 nn" src="{% static 'images/sqilog.png' %}" alt=""><span class="ji">SQI VOTING PLATFORM</span>
+                            <a  data-bs-toggle="collapse" data-bs-target="#menu" class="float-end text-dark d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
+                        </div>
+                        <div id="menu" class="col-lg-6 d-none d-lg-block">
+                            <ul class="float-end mul d-inline-block">
+                                {% if request.user.is_authenticated %}
+                                <li class="float-md-start px-4 pe-1 pt-4">
+                                   <a href="{% url 'overallresult' %}" class="fw-bold fs-8 text-primary"> View Result</a>
+                                </li>
+                                <li class="float-md-start px-4 pe-1 py-3">
+                                    <a href="{% url 'logout' %}"><button class="btn fw-bold fs-8 btn-outline-primary px-5">Logout</button></a>
+                                </li>
+                                <li class="float-md-start px-4 pe-1 py-3">
+                                    <button class="btn fw-bold fs-8 btn-primary"><a href="{% url 'profile' %}">My Account</a></button>
+                                </li>
+                                {% else %}
+                                <li class="float-md-start px-4 pe-1 py-3">
+                                    <a href="{% url 'login' %}"><button class="btn fw-bold fs-8 btn-outline-primary px-5">Login</button></a>
+                                </li>
+                                <li class="float-md-start px-4 pe-1 py-3">
+                                    <div class="vb">
+                                        <button class="btn fw-bold fs-8 btn-primary">Register as Voter</button>
+                                        <div class="mn">
+                                            <hr>
+                                            <a href=""><p>My Account</p></a>
+                                            <hr>
+                                            <a href="{% url 'register' %}"><p>Register</p></a>
+                                            <hr>
+                                            <a href=""><p>vote</p></a>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <p>Count Down:</p>
+            <span id="hourId"></span>
+            <span id="minId"></span>
+            <span id="secId"></span>
+            <p id="timeId"></p>
+        </div>
+        <!-- Header-->
+        <header class="py-5">
+            <div class="container-fluid px-lg-5">
+                <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+                    <div class="m-4 m-lg-5">
+                        <h1 class="display-5 fw-bold">Vote your Favourite Comrade</h1>
+                        <p class="fs-4">It's time to celebrate the DEVS that power our digital dreams. Cast your vote for your favorite Developer, Tutor, and Instructors 
+                            that have been your trusted companions in crafting incredible software.
+                            Your voice matters in recognizing and choosing the building blocks of our institution.</p>
+                        <a class="btn btn-primary btn-lg" href="#votingSection">Let's vote</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Page Content-->
+        <section class="pt-4" id="votingSection">
+            <div class="container px-lg-5">
+                <!-- Page Features-->
+                <div class="row gx-lg-5">
+
+                    
+                    
+                
+                    {% for category in categories  %}
+
+                    <div class="col-lg-4 col-xxl-3 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-collection"></i></div>
+                                <h2 class="fs-4 fw-bold">{{category.title}}</h2>
+                                <p class="mb-0">{{category.description}}</p>
+                            </div>
+                            <a class="btn btn-primary btn-lg voteId" href="{% url 'detail' category.slug %}">Vote</a>
+                            <p style="display: none; background-color: red;" class="endVote">Vote has Ended</p>
+                        </div>
+                    </div>
+
+                
+                        
+                    {% endfor %}
+                
+
+
+                
+
+                </div>
+            </div>
+        </section>
+       
+   
+   
+    </body>
+    <script src="{% static 'core/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'core/js/popper.min.js' %}"></script>
+    <script src="{% static 'core/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'core/plugins/scroll-fixed/jquery-scrolltofixed-min.js' %}"></script>
+    <script src="{% static 'core/plugins/testimonial/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'core/js/script.js' %}"></script>
+    <script>
+        let hourId = document.getElementById("hourId")
+        let minId = document.getElementById("minId")
+        let secId = document.getElementById("secId")
+        let timeId = document.getElementById("timeId")
+        let vote = document.getElementById("vote")
+        let voteId = document.getElementsByClassName("voteId")
+        let endVote = document.getElementsByClassName("endVote")
+        // let timeMin = 30
+        // let timeSec = 60
+        // localStorage.setItem("timeMin", timeMin)
+        // localStorage.setItem("timeSec", timeSec)
+
+        let timeMin = localStorage.getItem("timeMin")
+        let timeSec = localStorage.getItem("timeSec")
+
+
+       let myInterval =  setInterval(() => {
+        console.log(voteId)
+            
+            if (timeSec == 0){
+                timeMin -= 1
+                localStorage.setItem("timeMin", timeMin)
+                timeSec = 60
+                localStorage.setItem("timeSec", timeSec)
+            }
+
+            if (timeMin == 0){
+                alert("Voting has ended")
+                for(prop of voteId){
+                    prop.style.display = "none"
+                    console.log(prop)
+                }
+                for(prop of endVote){
+                    prop.style.display = "block"
+                }
+                clearInterval(myInterval)
+            }
+            timeSec -= 1
+            localStorage.setItem("timeSec", timeSec)
+
+            timeId.innerHTML = `Voting will end in ${timeMin} minutes, ${timeSec} seconds left`
+
+        }, 1000);
+    </script>
+</html>

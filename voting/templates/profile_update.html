@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Winku Social Network Toolkit</title>
+    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> 
+    
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+	<style>
+		.ggg{
+			width: 300px;
+			height: 250px;
+		}
+		.UU{
+			font-weight: 600;
+			font-size: 18px;
+			/* color: orangered; */
+		}
+        .sabi{
+            width: 50%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+        }
+        .cleans{
+            /* border: 1px solid red; */
+            box-shadow: 2px 2px;
+            width: 500px;
+            height: 100vh;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 0px;
+        }   
+        .hh{
+            position: absolute;
+            width: 500px;
+            height: 100vh;
+        }
+	</style>
+
+</head>
+<body>
+<!--<div class="se-pre-con"></div>-->
+<div class="theme-layout">
+	<div class="container-fluid pdng0">
+		<div class="row merged">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="land-featurearea">
+					<div class="land-meta">
+						<h1>SQI VOTING PLATFORM</h1>
+						<p class="UU">SQI college of ICT and vocational studies <span class="UU">VOTING PLATFORM</span></p>
+						<div class="friend-logo">
+							<img class="ggg" src="{% static 'images/sqilog.png' %}" alt="">
+						</div>
+						<a href="#" title="" class="folow-me UU">Follow Us on</a>
+					</div>	
+				</div>
+			</div>
+			<div class="sabi">
+                <div class="cleans">
+                    <form method="POST" enctype="multipart/form-data" class="hh">
+                      {% csrf_token %}
+                      <h3>update Your Profile</h3>
+                      <fieldset class="form-group">
+                        <legend class="border-bottom col-md-6"></legend>
+                        {{ u_form|crispy }}
+                        {{ p_form|crispy }}
+                      </fieldset>
+                      <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">UPDATE</button>
+                      </div>
+                    </form>
+                  </div>
+            </div>
+		</div>
+	</div>
+</div>
+	
+	<script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'js/main.min.js' %}"></script>
+	<script src="{% static 'js/script.js' %}">
+    let form_container= document.querySelector(".hh")
+    let inputs=form_container.querySelectorAll("input")
+
+    for(let input of inputs){
+      input.classList.add("form-control")
+    }
+  </script>
+
+</body>	
+
+</html>
